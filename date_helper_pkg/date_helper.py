@@ -24,18 +24,18 @@ class DateHelper:
 
         leap = self.get_leap(year)
         if leap:
-            firstdayofweek = firstdayofweek - timedelta(days = leap.days)
-            lastdayofweek = lastdayofweek - timedelta(days = leap.days)
+            firstdayofweek = firstdayofweek + timedelta(days=leap.days + 1)
+            lastdayofweek = lastdayofweek + timedelta(days=leap.days + 1)
 
         return (firstdayofweek, lastdayofweek)
 
     def get_week_from_date(self, year, date):
         leap = self.get_leap(year)
 
-        return (date - timedelta(days = leap.days)).strftime("%V")
+        return int((date + timedelta(days=leap.days) - 1).strftime("%V"))
 
-    def get_periods_date_range(self, year, period, tzOut):
-        semanas = [period * 3, period * 3 - 1, period * 3 - 2]
+    def get_periods_date_range(self, year, period):
+        semanas = [period * 3 - 2, period * 3 - 1, period * 3]
         fechas = [self.get_weekdates_range(year, semana) for semana in semanas]
 
-        return fechas
+        return [fechas[0][0], fechas[len(fechas) - 1][1]]
