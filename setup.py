@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="pinkfloyd92",
+    name="calendario_bananero",
     version="0.0.1",
     author="Sebastian Caceres",
     author_email="chevass@protonmail.com",

@@ -1,5 +1,3 @@
-# Example Package
+# Calendario Bananero
 
-This is a simple date_helper package. You can use
-[Github-flavored Markdown](https://guides.github.com/features/mastering-markdown/)
-to write your content.
+[![Build Status](https://travis-ci.org/PinkFLoyd92/date_helper.svg?branch=master)](https://travis-ci.org/PinkFLoyd92/date_helper)
