@@ -5,14 +5,15 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="calendario_bananero",
-    version="0.0.1",
+    version="1.0.0",
     author="Sebastian Caceres",
     author_email="chevass@protonmail.com",
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/PinkFLoyd92/date_helper",
-    packages=setuptools.find_packages(),
+    packages=['calendario_bananero'],
+    py_modules=['calendario_bananero'],
     install_requires=['pytz'],
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -7,7 +7,7 @@ dates : {year: start_date ...}
 tz: pytz object
 """
 
-class DateHelper:
+class CalendarioBananero:
     def __init__(self, dates):
         self.dates = dates
 
@@ -17,7 +17,7 @@ class DateHelper:
         diff = date - starting_day_of_year
 
         return diff
-        
+
     def get_weekdates_range(self, year, week):
         firstdayofweek = datetime.strptime(f'{year}-W{int(week)- 1}-1', "%Y-W%W-%w").date()
         lastdayofweek = firstdayofweek + timedelta(days=6.9)

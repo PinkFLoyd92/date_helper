@@ -3,7 +3,7 @@ import unittest, os, sys
 
 sys.path.append(os.path.abspath('..'))
 
-from date_helper_pkg import DateHelper
+from calendario_bananero import CalendarioBananero
 
 
 class TestDatehelper(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestDatehelper(unittest.TestCase):
             2018: datetime.now().date().replace(year=2017, month=12, day=28)
         }
 
-        self.date_helper = DateHelper(dates)
+        self.date_helper = CalendarioBananero(dates)
 
     def test_get_leap(self):
         self.assertEqual(self.date_helper.get_leap(2019).days, -2, "Should be -2")
