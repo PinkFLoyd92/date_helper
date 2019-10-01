@@ -35,6 +35,11 @@ class TestDatehelper(unittest.TestCase):
 
         self.assertEqual(range[1], datetime.now().date().replace(year=2019, month=1, day=5), "Should be equal to 2019-1-05")
 
+    def test_get_week_from_date(self):
+        semana = self.date_helper.get_week_from_date(2019, datetime.now().date().replace(year=2019, month=1, day=5))
+        self.assertEqual(semana, 1, "Should be equal to 1")
+
+
     def get_periods_date_range(self):
         pass
 
