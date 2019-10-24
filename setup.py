@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="calendario_bananero",
-    version="1.0.2",
+    version="1.0.3",
     author="Sebastian Caceres",
     author_email="chevass@protonmail.com",
     description="",
