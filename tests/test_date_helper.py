@@ -35,13 +35,24 @@ class TestDatehelper(unittest.TestCase):
 
         self.assertEqual(range[1], datetime.now().date().replace(year=2019, month=1, day=5), "Should be equal to 2019-1-05")
 
+    def test_get_weekdates_range2(self):
+        range = self.date_helper.get_weekdates_range(2019, 40)
+        self.assertEqual(range[0], datetime.now().date().replace(year=2019, month=9, day=29), "Should be equal to 2019-9-29")
+        self.assertEqual(range[1], datetime.now().date().replace(year=2019, month=10, day=5), "Should be equal to 2019-10-5")
+
     def test_get_week_from_date(self):
-        semana = self.date_helper.get_week_from_date(2019, datetime.now().date().replace(year=2019, month=1, day=5))
+        semana = self.date_helper.get_week_from_date(2019, datetime.now().date().replace(year=2018, month=12, day=30))
         self.assertEqual(semana, 1, "Should be equal to 1")
 
+    def test_get_week_from_date2(self):
+        semana = self.date_helper.get_week_from_date(2019, datetime.now().date().replace(year=2019, month=10, day=1))
 
-    def get_periods_date_range(self):
-        pass
+        self.assertEqual(semana, 40, "Should be equal to 40")
+
+    def test_get_periodos_from_range(self):
+        range = self.date_helper.get_periods_date_range(2019, 1)
+        self.assertEqual(range[0], datetime.now().date().replace(year=2018, month=12, day=30), "Should be equal to 2018-12-30")
+        self.assertEqual(range[1], datetime.now().date().replace(year=2019, month=1, day=19), "Should be equal to 2019-10-5")
 
 
 if __name__ == '__main__':
