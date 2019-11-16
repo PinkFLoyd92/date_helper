@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from epiweeks import Week, Year
 
 
 """
@@ -7,34 +8,49 @@ dates : {year: start_date ...}
 tz: pytz object
 """
 
+
 class CalendarioBananero:
     def __init__(self, dates):
         self.dates = dates
 
     def get_leap(self, year):
         date = self.dates[year]
-        starting_day_of_year = datetime.now().date().replace(year=year, month=1, day=1)
+        starting_day_of_year = Week(year, 1).startdate()
         diff = date - starting_day_of_year
 
         return diff
 
     def get_weekdates_range(self, year, week):
-        firstdayofweek = datetime.strptime(f'{year}-W{int(week)- 1}-1', "%Y-W%W-%w").date()
+        firstdayofweek = Week(int(year), int(week)).startdate()
         lastdayofweek = firstdayofweek + timedelta(days=6.9)
 
         leap = self.get_leap(year)
-        if leap:
-            firstdayofweek = firstdayofweek + timedelta(days=leap.days + 1)
-            lastdayofweek = lastdayofweek + timedelta(days=leap.days + 1)
+
+        if leap != timedelta(0):
+            firstdayofweek = firstdayofweek + timedelta(days=leap.days)
+            lastdayofweek = lastdayofweek + timedelta(days=leap.days)
+        else:
+            firstdayofweek = firstdayofweek + timedelta(days=leap.days)
+            lastdayofweek = lastdayofweek + timedelta(days=leap.days)
 
         return (firstdayofweek, lastdayofweek)
 
     def get_week_from_date(self, year, date):
         leap = self.get_leap(year)
-        return int((date + timedelta(days=leap.days + 3)).strftime("%V"))
+        epi_date = date + timedelta(days=leap.days)
+        epi_week = Week.fromdate(epi_date)
+        return epi_week.week
+        
+        # return int((date + timedelta(days=leap.days)).strftime("%V"))
 
     def get_periods_date_range(self, year, period):
         semanas = [period * 3 - 2, period * 3 - 1, period * 3]
         fechas = [self.get_weekdates_range(year, semana) for semana in semanas]
 
         return [fechas[0][0], fechas[len(fechas) - 1][1]]
+
+    def get_last_date(self, year):
+        if(self.dates.get(int(year) + 1) is not None):
+            return self.dates.get(int(year) + 1) - timedelta(days=1)
+        else:
+            datetime.now().date().replace(year=int(year) + 1, month=1, day=1)
