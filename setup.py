@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="calendario_bananero",
-    version="1.0.3",
+    version="1.1.2",
     author="Sebastian Caceres",
     author_email="chevass@protonmail.com",
     description="",
@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/PinkFLoyd92/date_helper",
     packages=['calendario_bananero'],
     py_modules=['calendario_bananero'],
-    install_requires=['pytz'],
+    install_requires=['pytz', 'epiweeks'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

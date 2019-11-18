@@ -1,3 +1,4 @@
+import math
 from datetime import datetime, timedelta
 from epiweeks import Week, Year
 
@@ -40,8 +41,13 @@ class CalendarioBananero:
         epi_date = date + timedelta(days=leap.days)
         epi_week = Week.fromdate(epi_date)
         return epi_week.week
-        
-        # return int((date + timedelta(days=leap.days)).strftime("%V"))
+
+    def get_period_from_date(self, year, date):
+        leap = self.get_leap(year)
+        epi_date = date + timedelta(days=leap.days)
+        epi_week = Week.fromdate(epi_date)
+        week = epi_week.week
+        return math.ceil(week/3)
 
     def get_periods_date_range(self, year, period):
         semanas = [period * 3 - 2, period * 3 - 1, period * 3]
@@ -53,4 +59,15 @@ class CalendarioBananero:
         if(self.dates.get(int(year) + 1) is not None):
             return self.dates.get(int(year) + 1) - timedelta(days=1)
         else:
-            datetime.now().date().replace(year=int(year) + 1, month=1, day=1)
+            return datetime.now().date().replace(
+                year=int(year) + 1, month=1, day=1)
+
+    def get_date_range_from_year(self, year):
+        last_date = None
+        if(self.dates.get(int(year) + 1) is not None):
+            last_date = self.dates.get(int(year) + 1) - timedelta(days=1)
+        else:
+            last_date = datetime.now().date().replace(
+                year=int(year) + 1, month=1, day=1)
+
+        return [self.dates[year], last_date]
