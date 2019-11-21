@@ -3,4 +3,4 @@ Simple helper that allows the users to create custom calendar leaps between year
 
 
 
-[![Build Status](https://travis-ci.org/PinkFLoyd92/date_helper.svg?branch=master)](https://travis-ci.org/PinkFLoyd92/date_helper)
+[![Build Status](https://travis-ci.org/PinkFLoyd92/date_helper.svg?branch=master)](https://travis-ci.org/PinkFLoyd92/calendario-bananero.svg?branch=master)
