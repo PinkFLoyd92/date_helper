@@ -18,7 +18,7 @@ class TestDatehelper(unittest.TestCase):
     def gen_test_data(self):
         dates = {
             2021: datetime.now().date().replace(year=2021, month=1, day=1),
-            2020: datetime.now().date().replace(year=2020, month=1, day=1),
+            2020: datetime.now().date().replace(year=2019, month=12, day=29),
             2019: datetime.now().date().replace(year=2018, month=12, day=30),
             2018: datetime.now().date().replace(year=2017, month=12, day=28)
         }
@@ -51,6 +51,28 @@ class TestDatehelper(unittest.TestCase):
 
         self.assertEqual(semana, 40, "Should be equal to 40")
 
+
+    def test_get_week_from_date3(self):
+        semana = self.date_helper.get_week_just_from_date(datetime.now().date().replace(year=2018, month=12, day=29))
+
+        self.assertEqual(semana, 52, "Should be equal to 52")
+
+    def test_get_week_from_date4(self):
+        semana = self.date_helper.get_week_just_from_date(datetime.now().date().replace(year=2018, month=12, day=30))
+
+        self.assertEqual(semana, 1, "Should be equal to 1")
+
+    def test_get_week_from_date5(self):
+        semana = self.date_helper.get_week_just_from_date(datetime.now().date().replace(year=2019, month=12, day=31))
+
+        self.assertEqual(semana, 1, "Should be equal to 1")
+
+    def test_get_week_from_date6(self):
+        semana = self.date_helper.get_week_just_from_date(datetime.now().date().replace(year=2020, month=1, day=3))
+
+        self.assertEqual(semana, 1, "Should be equal to 1")
+
+
     def test_get_periodos_from_range(self):
         # 2019
         range = self.date_helper.get_periods_date_range(2019, 1)
@@ -58,13 +80,13 @@ class TestDatehelper(unittest.TestCase):
         self.assertEqual(range[1], datetime.now().date().replace(year=2019, month=1, day=19), "Should be equal to 2019-10-5")
 
     def test_get_last_day(self):
-        self.assertEqual(self.date_helper.get_last_date(2019), datetime.now().date().replace(year=2019, month=12, day=31), "Should be equal to 2019-12-31")
+        self.assertEqual(self.date_helper.get_last_date(2019), datetime.now().date().replace(year=2019, month=12, day=28), "Should be equal to 2019-12-28")
 
     def test_period_dates_2020(self):
         # 2020
         range = self.date_helper.get_periods_date_range(2020, 1)
-        self.assertEqual(range[0], datetime.now().date().replace(year=2020, month=1, day=1), "Should be equal to 2020-1-1")
-        self.assertEqual(range[1], datetime.now().date().replace(year=2020, month=1, day=21), "Should be equal to 2020-1-21")
+        self.assertEqual(range[0], datetime.now().date().replace(year=2019, month=12, day=29), "Should be equal to 2019-12-29")
+        self.assertEqual(range[1], datetime.now().date().replace(year=2020, month=1, day=18), "Should be equal to 2020-1-21")
 
     def test_period_dates_2018(self):
         # 2020

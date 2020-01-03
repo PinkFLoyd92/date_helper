@@ -9,7 +9,6 @@ dates : {year: start_date ...}
 tz: pytz object
 """
 
-
 class CalendarioBananero:
     def __init__(self, dates):
         self.dates = dates
@@ -17,8 +16,8 @@ class CalendarioBananero:
     def get_leap(self, year):
         date = self.dates[year]
         starting_day_of_year = Week(year, 1).startdate()
+        # diff = starting_day_of_year - date
         diff = date - starting_day_of_year
-
         return diff
 
     def get_weekdates_range(self, year, week):
@@ -37,6 +36,20 @@ class CalendarioBananero:
         return (firstdayofweek, lastdayofweek)
 
     def get_week_from_date(self, year, date):
+        leap = self.get_leap(year)
+        epi_date = date + timedelta(days=leap.days)
+        epi_week = Week.fromdate(epi_date)
+        return epi_week.week
+
+    def get_week_just_from_date(self, date):
+        year_date = date.year
+        year = year_date
+
+        if date >= self.dates[year_date] and date < self.dates[year_date + 1]:
+            year = year_date
+        else:
+            year = year_date + 1
+
         leap = self.get_leap(year)
         epi_date = date + timedelta(days=leap.days)
         epi_week = Week.fromdate(epi_date)
