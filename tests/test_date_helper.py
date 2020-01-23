@@ -100,6 +100,13 @@ class TestDatehelper(unittest.TestCase):
         self.assertEqual(range[0], datetime.now().date().replace(year=2017, month=12, day=28), "Should be equal to 2017-12-28")
         self.assertEqual(range[1], datetime.now().date().replace(year=2018, month=12, day=29), "Should be equal to 2018-12-29")
 
+    def test_get_weeks_from_year(self):
+        range_2018 = self.date_helper.get_weeks(2018)
+        range_2019 = self.date_helper.get_weeks(2019)
+
+        self.assertEqual(range_2018, 52, "Should be equal to 52")
+        self.assertEqual(range_2019, 52, "Should be equal to 52")
+
 
 if __name__ == '__main__':
     unittest.main()

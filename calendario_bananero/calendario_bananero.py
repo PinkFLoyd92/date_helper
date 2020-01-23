@@ -9,9 +9,14 @@ dates : {year: start_date ...}
 tz: pytz object
 """
 
+
 class CalendarioBananero:
     def __init__(self, dates):
         self.dates = dates
+
+    def get_weeks(self, year):
+        year = Year(year)
+        return year.totalweeks()
 
     def get_leap(self, year):
         date = self.dates[year]
